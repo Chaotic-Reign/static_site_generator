@@ -34,10 +34,34 @@ class LeafNode(HTMLNode):
 
     def to_html(self):
         if self.value == None:
-            raise ValueError
+            raise ValueError("LeafNodes must have a value!")
         if self.tag == None:
             return self.value
         if self.props != None:
             return "<" + self.tag + " " + self.props_to_html() + ">" + self.value + "</" + self.tag + ">"
         else:
             return "<" + self.tag + ">" + self.value + "</" + self.tag + ">"
+        
+class ParentNode(HTMLNode):
+    def __init__(self, tag, children, props=None):
+        super().__init__(tag, children, props)
+        self.tag = tag
+        self.children = children
+        self.value = None
+        self.props = props
+
+    def to_html(self):
+        if self.tag == None:
+            raise ValueError("Parent Nodes must have a tag!")
+        if self.children == None:
+            raise ValueError("Parent Nodes must have one or more children!")
+        if self.props != None:
+            opening = "<" + self.tag + " " + self.props_to_html() + ">"
+        else:
+            opening = "<" + self.tag + ">"
+        ending = "</" + self.tag + ">"
+        middle = ""
+        for child in self.children:
+            middle = middle + child.to_html()
+        result = opening + middle + ending
+        return result
