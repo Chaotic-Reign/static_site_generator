@@ -24,10 +24,6 @@ class TestTextNode(unittest.TestCase):
         node2 = TextNode("This text is the same", TextType.TEXT)
         self.assertNotEqual(node, node2)
 
-
-if __name__ == "__main__":
-    unittest.main()
-
 class TestTextNodeToHTMLNODE(unittest.TestCase):
 
     def test_text(self):
@@ -72,3 +68,6 @@ class TestTextNodeToHTMLNODE(unittest.TestCase):
         node = TextNode("This will raise an Exception", "Bold")
         with self.assertRaises(Exception):
             html_node = text_node_to_html_node(node)
+
+if __name__ == "__main__":
+    unittest.main()

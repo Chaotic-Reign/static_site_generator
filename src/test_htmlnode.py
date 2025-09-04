@@ -177,3 +177,7 @@ class TestParentNode(unittest.TestCase):
             grandparent.to_html(),
             '<body><p>Sentence one. <b>Sentence two is bold. </b><a href="www.linky_link.net">Sentence three is a link.</a></p><div id="tbh-idk-the-difference-between-div-and-p"><i>Some italics this time because I am bored. </i>Why did I make so many children?</div><span title="yeah, idk how span works either"><b>There is something wrong with child three. </b><i>Why did child three have so many kids? </i>Like five kids? <a href="www.crazy_people_only.web">Are you kidding me?</a><b><i> Five is way too many kids, and now five has a grandchild too?!?</i></b></span><p>Why did I do this to myself you ask? I am a psychopath. That is why.</p><p><i>Child five is the only sane one here.</i></p></body>'
         )
+
+
+if __name__ == "__main__":
+    unittest.main()
