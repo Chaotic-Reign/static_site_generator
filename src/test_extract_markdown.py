@@ -1,5 +1,5 @@
 import unittest
-from extract_markdown_links_and_images import extract_markdown_images, extract_markdown_links
+from extract_markdown import extract_markdown_images, extract_markdown_links
 
 class TestExtractMarkdownImages(unittest.TestCase):
 
@@ -40,3 +40,6 @@ class TestExtractMarkdownLinks(unittest.TestCase):
             "This text has [one link](www.cookiebake.org/arch/14-08-21), ![one image](www.cookiebake.org/gal/04-07-19), and a [second link](www.cookiebake.org/arch/04-09-21)"
         )
         self.assertEqual([("one link", "www.cookiebake.org/arch/14-08-21"), ("second link", "www.cookiebake.org/arch/04-09-21")], matches)
+
+if __name__ == "__main__":
+    unittest.main()
