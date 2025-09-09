@@ -4,16 +4,19 @@ from split_nodes import split_nodes_delimiter, split_nodes_link, split_nodes_ima
 from extract_markdown import extract_markdown_images, extract_markdown_links
 from text_to_textnodes import text_to_textnodes
 from split_blocks import markdown_to_blocks
+from markdown_to_html import markdown_to_html_node
 
 def main():
-    md = """This is **bolded** paragraph
+    md = """>This is
+    >a
+    >blockquote
+    >
+    >with two
+    >paragraphs
+    """
+    node = markdown_to_html_node(md)
+    html = node.to_html()
 
-            This is another paragraph with _italic_ text and `code` here
-            This is the same paragraph on a new line
-            
-            - This is a list
-            - with items
-            """
-    print(markdown_to_blocks(md))
+    print(html)
 
 main()
