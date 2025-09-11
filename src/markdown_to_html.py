@@ -119,11 +119,8 @@ def markdown_to_html_node(markdown):
             node = ParentNode(block_tag, nodes)
             html_nodes.append(node)
         if block_to_block_type(block) == BlockType.CODE:
-            print(f"Debug - raw code block: {repr(block)}")
             text = block[4:-3]
-            print(f"Debug - extracted text: {repr(text)}")
             code = LeafNode("code", text)
-            print(f"Debug - HTML output: {code.to_html()}")
             node = ParentNode("pre", [code])
             html_nodes.append(node)
     html_node = ParentNode("div", html_nodes)
