@@ -9,12 +9,12 @@ class TestMarkdownToBlock(unittest.TestCase):
     def test_markdown_to_blocks(self):
         md = """This is **bolded** paragraph
 
-        This is another paragraph with _italic_ text and `code` here
-        This is the same paragraph on a new line
+    This is another paragraph with _italic_ text and `code` here
+    This is the same paragraph on a new line
             
-        - This is a list
-        - with items
-        """
+    - This is a list
+    - with items
+    """
         blocks = markdown_to_blocks(md)
         self.assertEqual(
             blocks,
@@ -27,15 +27,15 @@ class TestMarkdownToBlock(unittest.TestCase):
 
     def test_markdown_to_blocks_2(self):
         md = """This is the first paragraph.
-        It contains **bolded** text.
-        It also contains _italics_.
+    It contains **bolded** text.
+    It also contains _italics_.
         
-        This is a new paragraph.
-        I am tired of making these tests.
+    This is a new paragraph.
+    I am tired of making these tests.
         
-        # Someone save me
-        # (yes, I know it doesn't make sense to put the heading at the end)
-        """
+    # Someone save me
+    # (yes, I know it doesn't make sense to put the heading at the end)
+    """
 
         expected_result = [
             "This is the first paragraph.\nIt contains **bolded** text.\nIt also contains _italics_.",
@@ -133,13 +133,13 @@ class TestMarkdownToHTMLNode(unittest.TestCase):
         self.maxDiff = None
 
         md = """
-    This is **bolded** paragraph
-    text in a p
-    tag here
-
-    This is another paragraph with _italic_ text and `code` here
-
-    """
+        This is **bolded** paragraph
+        text in a p
+        tag here
+        
+        This is another paragraph with _italic_ text and `code` here
+        
+        """
 
         node = markdown_to_html_node(md)
         html = node.to_html()
@@ -152,11 +152,11 @@ class TestMarkdownToHTMLNode(unittest.TestCase):
         self.maxDiff = None
 
         md = """
-    ```
-    This is text that _should_ remain
-    the **same** even with inline stuff
-    ```
-    """
+        ```
+        This is text that _should_ remain
+        the **same** even with inline stuff
+        ```
+        """
 
         node = markdown_to_html_node(md)
         html = node.to_html()

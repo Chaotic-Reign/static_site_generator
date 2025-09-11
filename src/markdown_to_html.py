@@ -85,34 +85,17 @@ def text_to_children(block):
 
     if block_type == BlockType.QUOTE:
         lines = block.split("\n")
-        p_block_values = []
-        p_block = ""
+        new_lines = []
+        for line in lines:
+            new_line = line.strip(">").strip()
+            if new_line != "":
+                new_lines.append(new_line)
+        block = " ".join(new_lines)
+        text_nodes = text_to_textnodes(block)
 
-        for i in range(len(lines)):
-            new_line = lines[i].strip(">")
-
-            if new_line == "":
-                p_block = p_block.strip()
-                p_block_values.append(p_block)
-                p_block = ""
-
-            if i == (len(lines) - 1):
-                p_block = p_block + new_line
-                p_block = p_block.strip()
-                p_block_values.append(p_block)
-                    
-            else:
-                p_block = p_block + new_line + " "
-
-        for value in p_block_values:
-            children = []
-            text_nodes = text_to_textnodes(value)
-
-            for node in text_nodes:
-                children.append(text_node_to_html_node(node))
-            
-            p_node = ParentNode("p", children)
-            nodes.append(p_node)
+        for text_node in text_nodes:
+            node = text_node_to_html_node(text_node)
+            nodes.append(node)
 
     if block_type == BlockType.PARA:
         block = " ".join(block.split("\n"))
@@ -136,9 +119,12 @@ def markdown_to_html_node(markdown):
             node = ParentNode(block_tag, nodes)
             html_nodes.append(node)
         if block_to_block_type(block) == BlockType.CODE:
-            text = (block.strip("```")).lstrip("\n")
-            text_node = TextNode(text, TextType.CODE)
-            node = ParentNode("pre", [text_node_to_html_node(text_node)])
+            print(f"Debug - raw code block: {repr(block)}")
+            text = block[4:-3]
+            print(f"Debug - extracted text: {repr(text)}")
+            code = LeafNode("code", text)
+            print(f"Debug - HTML output: {code.to_html()}")
+            node = ParentNode("pre", [code])
             html_nodes.append(node)
     html_node = ParentNode("div", html_nodes)
     return html_node
